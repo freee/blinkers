@@ -6,7 +6,7 @@ module Blinkers
 
     module InstanceMethods
       def secure_params(*sensitive_keys)
-        query = params.clone
+        query = params.clone.to_unsafe_h
 
         filter = ActionDispatch::Http::ParameterFilter.new(
           Rails.application.config.filter_parameters + sensitive_keys
